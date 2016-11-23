@@ -1,0 +1,11 @@
+[Unit]
+Description=SunFounder Car
+
+[Service]
+ExecStart=/usr/bin/python /home/pi/Sunfounder_Smart_Video_Car_Kit_for_RaspberryPi/html_server/manage.py runserver 0.0.0.0:8000  
+StandardOutput=syslog
+StandardError=syslog
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
