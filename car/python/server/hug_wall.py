@@ -4,8 +4,8 @@ import car_dir
 import motor
 import time
 
-TRIG = 11
-ECHO = 12
+TRIG = 16
+ECHO = 18
 
 def setupPing():
 	GPIO.setmode(GPIO.BOARD)
@@ -38,19 +38,20 @@ def init():
     motor.setSpeed(50)
 
 init()
-# motor.forward()
+motor.backward()
 i = 0
 while (i < 4):
     d = distance()
     print d
+    time.sleep(.05)
 
     if (d < 60):
         i = i + 1
     else:
         i = 0
 
-print stop
-# motor.stop()
+print "stop"
+motor.stop()
 
 #motor.forward()
 #time.sleep(3)
