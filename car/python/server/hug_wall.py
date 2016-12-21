@@ -38,7 +38,7 @@ def init():
     motor.setSpeed(50)
 
 init()
-motor.forward()
+# motor.forward()
 i = 0
 while (i < 4):
     d = distance()
@@ -49,7 +49,8 @@ while (i < 4):
     else:
         i = 0
 
-motor.stop()
+print stop
+# motor.stop()
 
 #motor.forward()
 #time.sleep(3)
