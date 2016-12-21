@@ -7,51 +7,73 @@ import time
 TRIG = 16
 ECHO = 18
 
-def setupPing():
-	GPIO.setmode(GPIO.BOARD)
-	GPIO.setup(TRIG, GPIO.OUT)
-	GPIO.setup(ECHO, GPIO.IN)
+class Ping:
+    def __init__(self, trig, echo):
+        self.trig = trig
+        self.echo = echo
 
-def distance():
-	GPIO.output(TRIG, 0)
-	time.sleep(0.000002)
+        GPIO.setmode(GPIO.BOARD)
+        GPIO.setup(trig, GPIO.OUT)
+        GPIO.setup(echo, GPIO.IN)
 
-	GPIO.output(TRIG, 1)
-	time.sleep(0.00001)
-	GPIO.output(TRIG, 0)
+    def measure():
+        GPIO.output(TRIG, 0)
+        time.sleep(0.000002)
 
-	while GPIO.input(ECHO) == 0:
-		a = 0
-	time1 = time.time()
-	while GPIO.input(ECHO) == 1:
-		a = 1
-	time2 = time.time()
+        GPIO.output(TRIG, 1)
+        time.sleep(0.00001)
+        GPIO.output(TRIG, 0)
 
-	during = time2 - time1
-	return during * 340 / 2 * 100
+        while GPIO.input(ECHO) == 0:
+        	a = 0
+        time1 = time.time()
+        while GPIO.input(ECHO) == 1:
+        	a = 1
+        time2 = time.time()
 
-def init():
-    car_dir.setup()
-    motor.setup()
-    car_dir.home()
-    setupPing()
-    motor.setSpeed(50)
+        during = time2 - time1
+        return during * 340 / 2 * 100
 
-init()
-motor.backward()
-i = 0
-while (i < 4):
-    d = distance()
-    print d
+car_dir.setup()
+#motor.setup()
+car_dir.home()
+setupPing()
+#motor.setSpeed(50)
+
+forwardPing = Ping(16,18)
+rightPing = Ping(29, 31)
+
+#motor.backward()
+
+stop = 0
+reset = 0
+
+while (stop < 4):
+    # stop
+    f = forward.measure()
+    print "Forward: " + f + " cm"
+
+    if (f < 60):
+        stop = stop + 1
+    else:
+        stop = 0
+
+    # course correct
+    r = right.measure()
+    print "Right: " + r + " cm"
+
+    if reset:
+        car_dir.home()
+        reset = 0
+    else:
+        car_dir.turn_right() if r > 30 else car_dir.turn_left()
+        reset = 1
+
     time.sleep(.05)
 
-    if (d < 60):
-        i = i + 1
-    else:
-        i = 0
-
 print "stop"
-motor.stop()
+#motor.stop()
+GPIO.cleanup()
 
 #motor.forward()
 #time.sleep(3)
