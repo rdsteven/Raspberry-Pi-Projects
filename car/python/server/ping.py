@@ -9,7 +9,7 @@ class Ping:
         GPIO.setup(trig, GPIO.OUT)
         GPIO.setup(echo, GPIO.IN)
 
-    def measure(self):
+    def read(self):
         GPIO.output(self.trig, 0)
         time.sleep(0.000002)
 
@@ -26,3 +26,11 @@ class Ping:
 
         during = time2 - time1
         return during * 340 / 2 * 100
+
+    def measure(self, sample):
+        sum = 0
+
+        for val in range(sample):
+            sum = sum + self.read()
+
+        return sum / sample

@@ -9,3 +9,4 @@ class Display:
     def displayIP():
         iface = netifaces.ifaddresses('en0')
         LCD1602.write(0, 0, "IP: " + iface[netifaces.AF_INET].addr)
+        # iwgetid -r to get network name
