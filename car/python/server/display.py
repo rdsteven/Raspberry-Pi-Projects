@@ -1,5 +1,5 @@
 import time
-import LCD1602
+from lib import LCD1602
 import netifaces
 
 class Display:

@@ -24,7 +24,7 @@ def setup():
 	pwm.set_frequency(60)
 
 # ==========================================================================================
-# Control the servo connected to channel 0 of the servo control board, so as to make the 
+# Control the servo connected to channel 0 of the servo control board, so as to make the
 # car turn left.
 # ==========================================================================================
 def turn_left():
@@ -43,7 +43,6 @@ def turn_right():
 # ==========================================================================================
 
 def turn(angle):
-	angle = Map(angle, 0, 255, leftPWM, rightPWM)
 	pwm.set_value(0, 0, angle)
 
 def home():
@@ -66,5 +65,3 @@ def test():
 if __name__ == '__main__':
 	setup()
 	home()
-
-

@@ -12,58 +12,42 @@ from gamma import Gamma
 from ping import Ping
 from temperature import Temperature
 
+# This class pretty much just puts all the cars controllers into a single
+# component
 class Car:
-    def __init__(self, logFile):
-        GPIO.setmode(GPIO.BOARD)
-        self.logFile = logFile
+    def __init__(self, debug):
+        self.debug = debug;
 
         self.stearing = Stearing()
-        self.drive = Drive(35)
+        self.drive = Drive(defaultSpeed)
 
         self.location = Location()
         self.temp = Temperature()
         self.gamma = Gamma()
         self.display = Display()
 
-    def hug_wall():
-        stop = 0
-        reset = 0
-        count = 0
+    def getPosition(self):
+        return self.location.getLocation()
 
-        while (stop < 4):
-            # stop
-            f = forwardPing.measure()
-            print "Forward: ", f, " cm"
+    def forward(self, speed):
+        print "Forward" if self.debug
+        self.drive.forward(speed)
 
-            if (f < 60):
-                stop = stop + 1
-            else:
-                stop = 0
+    def stop(self):
+        print "Stop" if self.debug
+        self.drive.stop()
 
-            # course correct
-            if count % 5 == 0:
-                r = rightPing.measure()
-                print "Right: ", r, " cm"
+    def reverse(self, speed):
+        print "Reverse" if self.debug
+        self.drive.backward(speed)
 
-                if reset:
-                    car_dir.home()
-                    reset = 0
-                else:
-                    car_dir.turn_right() if r > 30 else car_dir.turn_left()
-                    reset = 1
+    def turn(self, angle):
+        if angle > 50 || angle < -50:
+            print "turn angle not between -50 and 50" if self.debug
+            return
 
-            count = count + 1
-            time.sleep(.05)
+        self.stearing.turn(angle)
 
-        print "stop"
-        motor.stop()
-        GPIO.cleanup()
-
-    def start():
-
-    def stop():
-
-motor.backward()
 
 #motor.forward()
 #time.sleep(3)
