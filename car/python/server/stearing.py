@@ -5,8 +5,9 @@ class Stearing:
         car_dir.setup()
         car_dir.home()
 
-    def turn(angle):
-        if angle > 50 || angle < -50:
+    def turn(self, angle):
+        if angle > 50 or angle < -50:
+	    print "Fuck off"
             return
 
-        cur_dir.turn(450 + angle)
+        car_dir.turn(450 + angle)
