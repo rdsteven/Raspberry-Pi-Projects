@@ -15,13 +15,13 @@ from temperature import Temperature
 # This class pretty much just puts all the cars controllers into a single
 # component
 class Car:
-    def __init__(self, front, right, back, left, debug):
+    def __init__(self, debug):
         self.debug = debug;
 
         self.stearing = Stearing()
         self.drive = Drive(defaultSpeed)
 
-        self.location = Location(front, right, back, left)
+        self.location = Location()
         self.temp = Temperature()
         self.gamma = Gamma()
         self.display = Display()

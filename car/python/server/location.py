@@ -5,12 +5,13 @@ from ping import Ping
 # amount that gives you the delta of the right measurement between this and the
 # lookup
 class Location:
-    def __init__(self, front, right, back, left, sample):
+    def __init__(self, sample):
         self.sample = sample
-        self.front = Ping(front[0], front[1])
-        self.right = Ping(right[0], right[1])
-        self.back = Ping(back[0], back[1])
-        self.left = Ping(left[0], left[1])
+
+        self.front = Ping(33, 35)
+        self.right = Ping(29, 31)
+        self.back = Ping(38, 40)
+        self.left = Ping(23, 24)
 
     def getLocation(self):
         right = self.right.measure(self.sample)

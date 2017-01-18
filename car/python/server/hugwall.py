@@ -3,12 +3,7 @@ import car
 
 GPIO.setmode(GPIO.BOARD)  # set gpio mode.  can only be done onces so it's here
 
-FRONT = [33, 35]
-RIGHT = [29, 31]
-BACK  = [38, 40]
-LEFT  = [23, 24]
-
-car = Car(FRONT, RIGHT, BACK, LEFT, true) # create car instance in debug mode
+car = Car(true) # create car instance in debug mode
 car.forward(35) # tell the car to drive foreward at 35 speed
 
 stop = 0
