@@ -5,7 +5,7 @@ GPIO.setmode(GPIO.BOARD)  # set gpio mode.  can only be done onces so it's here
 
 FRONT = [33, 35]
 RIGHT = [29, 31]
-BACK  = [20, 21]
+BACK  = [38, 40]
 LEFT  = [23, 24]
 
 car = Car(FRONT, RIGHT, BACK, LEFT, true) # create car instance in debug mode
