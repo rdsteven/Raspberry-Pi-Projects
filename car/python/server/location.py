@@ -10,8 +10,8 @@ class Location:
 
         self.front = Ping(33, 35)
         self.right = Ping(29, 31)
-        self.back = Ping(38, 40)
-        self.left = Ping(16, 18)
+        #self.back = Ping(38, 40)
+        #self.left = Ping(16, 18)
 	self.previous = { 'right': -1 }
 
     def getLocation(self):
@@ -21,9 +21,13 @@ class Location:
         self.previous = {
             'front': self.front.measure(self.sample),
             'right': right,
-            'back': self.back.measure(self.sample),
-            'left': self.left.measure(self.sample),
             'shift': shift
         }
 
         return self.previous
+
+    def getFront(self):
+        return self.front.measure(1)
+
+    def getRight(self):
+        return self.right.measure(1)

@@ -37,10 +37,10 @@ motor.setup()
 car_dir.home()
 motor.setSpeed(35)
 
-forwardPing = Ping(16, 18)
+forwardPing = Ping(33, 35)
 rightPing = Ping(29, 31)
 
-motor.backward()
+motor.forward()
 
 stop = 0
 reset = 0
@@ -73,6 +73,7 @@ while (stop < 4):
 
 print "stop"
 motor.stop()
+car_dir.home()
 GPIO.cleanup()
 
 #motor.forward()

@@ -13,9 +13,8 @@ count = 0
 
 while (stop < 4):
     # Get the cars current position
-    position = car.getPosition()
-    forward = position['front']
-    right = position['right']
+    forward = car.getFront() 
+    right = car.getRight()
     
     print "Front: ", forward, " Right: ", right
 
@@ -32,13 +31,13 @@ while (stop < 4):
             reset = 0
         else:
             if (right > 30):
-                car.turn(5)
+                car.turn(25)
             else:
-                car.turn(-5)
+                car.turn(-25)
             reset = 1
 
     count = count + 1
-    time.sleep(.05)
+    time.sleep(0.1)
 
 car.turn(0)
 car.stop()

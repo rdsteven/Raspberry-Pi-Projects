@@ -5,7 +5,7 @@ import time
 # Car
 from stearing import Stearing
 from drive import Drive
-from display import Display
+#from display import Display
 
 # Sensors
 #from gamma import Gamma
@@ -22,10 +22,16 @@ class Car:
         self.location = Location(3)
         #self.temp = Temperature()
         #self.gamma = Gamma()
-        self.display = Display()
+        #self.display = Display()
 
     def getPosition(self):
         return self.location.getLocation()
+
+    def getFront(self):
+        return self.location.getFront()
+
+    def getRight(self):
+        return self.location.getRight()
 
     def forward(self, speed):
 	print "Forward"
