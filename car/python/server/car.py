@@ -8,44 +8,36 @@ from drive import Drive
 from display import Display
 
 # Sensors
-from gamma import Gamma
-from ping import Ping
-from temperature import Temperature
+#from gamma import Gamma
+from location import Location
+#from temperature import Temperature
 
 # This class pretty much just puts all the cars controllers into a single
 # component
 class Car:
-    def __init__(self, debug):
-        self.debug = debug;
-
+    def __init__(self):
         self.stearing = Stearing()
-        self.drive = Drive(defaultSpeed)
+        self.drive = Drive()
 
-        self.location = Location()
-        self.temp = Temperature()
-        self.gamma = Gamma()
+        self.location = Location(3)
+        #self.temp = Temperature()
+        #self.gamma = Gamma()
         self.display = Display()
 
     def getPosition(self):
         return self.location.getLocation()
 
     def forward(self, speed):
-        print "Forward" if self.debug
+	print "Forward"
         self.drive.forward(speed)
 
     def stop(self):
-        print "Stop" if self.debug
         self.drive.stop()
 
     def reverse(self, speed):
-        print "Reverse" if self.debug
         self.drive.backward(speed)
 
     def turn(self, angle):
-        if angle > 50 || angle < -50:
-            print "turn angle not between -50 and 50" if self.debug
-            return
-
         self.stearing.turn(angle)
 
 
